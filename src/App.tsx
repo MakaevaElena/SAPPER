@@ -145,9 +145,7 @@ export default function App() {
                     <div className="icon two"></div>
                   ) : field[y * size + x] === 3 ? (
                     <div className="icon three"></div>
-
                   ) : (
-                    // field[y * size + x]
                     <div className="icon zero"></div>
                   )}
                 </div>
