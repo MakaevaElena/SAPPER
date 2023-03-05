@@ -1,0 +1,50 @@
+.app {
+  max-width: 320px;
+  /* text-align: center; */
+  margin: 0 auto;
+  border: 20px solid rgb(202, 202, 202);
+}
+
+.yLine {
+  display: flex;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  /* margin: 1px; */
+}
+
+.icon {
+  background: url('/public/img/minesweeper-sprites_9TPZzv3.png');
+  background-repeat: no-repeat;
+  width: 17px;
+  height: 17px;
+}
+
+.mine {
+  background-position: -85px -50px;
+}
+
+.death {
+  background-color: rgb(202, 202, 202);
+}
+
+.win {
+  background-color: rgb(202, 202, 202);
+}
+
+.fill {
+  background-position: 0px -50px;
+}
+
+.flag {
+  background-position: -35px -50px;
+}
+
+.question {
+  background-position: -50px -50px;
+}
