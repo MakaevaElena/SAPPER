@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SAPPER/static/css/main.f4d2d0bc.css",
+    "main.js": "/SAPPER/static/js/main.536897ba.js",
+    "index.html": "/SAPPER/index.html",
+    "main.f4d2d0bc.css.map": "/SAPPER/static/css/main.f4d2d0bc.css.map",
+    "main.536897ba.js.map": "/SAPPER/static/js/main.536897ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4d2d0bc.css",
+    "static/js/main.536897ba.js"
+  ]
+}
