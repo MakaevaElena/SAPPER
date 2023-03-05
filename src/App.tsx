@@ -67,7 +67,7 @@ export default function App() {
 
   let xLine = `cell ${death ? 'death ' : win ? 'win' : 'default'}`;
 
-  const hendler = (x: number, y: number) => {
+  const leftHendler = (x: number, y: number) => {
     if (win || death) return;
 
     if (mask[y * size + x] === Mask.Transparent) return;
@@ -86,7 +86,6 @@ export default function App() {
 
     while (clearing.length) {
       const [x, y] = clearing.pop()!!;
-
       mask[y * size + x] = Mask.Transparent;
 
       if (field[y * size + x] !== 0) continue;
@@ -99,8 +98,24 @@ export default function App() {
 
     if (field[y * size + x] === Mine) {
       mask.forEach((_, i) => (mask[i] = Mask.Transparent));
-
       setDeath(true);
+    }
+
+    setMask((prev) => [...prev]);
+  };
+
+  const rightHendler = (e: React.FormEvent, x: number, y: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (win || death) return;
+    if (mask[y * size + x] === Mask.Transparent) return;
+    if (mask[y * size + x] === Mask.Fill) {
+      mask[y * size + x] = Mask.Flag;
+    } else if (mask[y * size + x] === Mask.Flag) {
+      mask[y * size + x] = Mask.Question;
+    } else if (mask[y * size + x] === Mask.Question) {
+      mask[y * size + x] = Mask.Fill;
     }
 
     setMask((prev) => [...prev]);
@@ -116,30 +131,25 @@ export default function App() {
                 <div
                   className={xLine}
                   key={x}
-                  onClick={() => hendler(x, y)}
+                  onClick={() => leftHendler(x, y)}
                   onContextMenu={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if (win || death) return;
-
-                    if (mask[y * size + x] === Mask.Transparent) return;
-
-                    if (mask[y * size + x] === Mask.Fill) {
-                      mask[y * size + x] = Mask.Flag;
-                    } else if (mask[y * size + x] === Mask.Flag) {
-                      mask[y * size + x] = Mask.Question;
-                    } else if (mask[y * size + x] === Mask.Question) {
-                      mask[y * size + x] = Mask.Fill;
-                    }
-
-                    setMask((prev) => [...prev]);
+                    rightHendler(e, x, y);
                   }}>
-                  {mask[y * size + x] !== Mask.Transparent
-                    ? mapMaskToView[mask[y * size + x]]
-                    : field[y * size + x] === Mine
-                    ? <div className="icon mine"></div>
-                    : field[y * size + x]}
+                  {mask[y * size + x] !== Mask.Transparent ? (
+                    mapMaskToView[mask[y * size + x]]
+                  ) : field[y * size + x] === Mine ? (
+                    <div className="icon mine"></div>
+                  ) : field[y * size + x] === 1 ? (
+                    <div className="icon one"></div>
+                  ) : field[y * size + x] === 2 ? (
+                    <div className="icon two"></div>
+                  ) : field[y * size + x] === 3 ? (
+                    <div className="icon three"></div>
+
+                  ) : (
+                    // field[y * size + x]
+                    <div className="icon zero"></div>
+                  )}
                 </div>
               );
             })}
